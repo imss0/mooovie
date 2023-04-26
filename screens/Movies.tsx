@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, useColorScheme } from "react-native";
 import * as colors from "../colors";
+import styled from "styled-components/native";
 
 const Movies = () => {
   const isDark = useColorScheme() === "dark";

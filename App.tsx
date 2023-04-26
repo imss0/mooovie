@@ -3,7 +3,7 @@ import React from "react";
 import * as Font from "expo-font";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
-import Tabs from "./navigation/Tabs";
+import Stack from "./navigation/Stack";
 
 export default function App() {
   const [fonts] = Font.useFonts(FontAwesome5.font);
@@ -12,7 +12,7 @@ export default function App() {
   }
   return (
     <NavigationContainer>
-      <Tabs />
+      <Stack />
     </NavigationContainer>
   );
 }
