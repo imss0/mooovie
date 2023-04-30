@@ -1,21 +1,26 @@
 import React from "react";
-import { View, Text, useColorScheme } from "react-native";
+import { Text, useColorScheme, TouchableOpacity } from "react-native";
 import * as colors from "../colors";
 import styled from "styled-components/native";
 
-const Movies = () => {
-  const isDark = useColorScheme() === "dark";
+const Btn = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: ${props => props.theme.mainBgColor}
+`;
+
+const Title = styled.Text`
+  color: ${props => props.theme.textColor};
+`;
+
+//@ts-ignore
+const Movies = ({ navigation: { navigate } }) => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: isDark ? colors.BLACK : colors.WHITE,
-      }}
-    >
-      <Text>Movies</Text>
-    </View>
+    //@ts-ignore
+    <Btn onPress={() => navigate("Stack", { screen: "One" })}>
+      <Title>Movies</Title>
+    </Btn>
   );
 };
 

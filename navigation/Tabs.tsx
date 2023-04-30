@@ -3,6 +3,7 @@ import { useColorScheme } from "react-native";
 import Movies from "../screens/Movies";
 import Search from "../screens/Search";
 import Tv from "../screens/Tv";
+import Stack from "./Stack";
 import * as colors from "../colors";
 import { FontAwesome5 } from "@expo/vector-icons";
 
