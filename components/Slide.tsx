@@ -3,15 +3,10 @@ import styled from "styled-components/native";
 import { View, StyleSheet, useColorScheme } from "react-native";
 import { BlurView } from "expo-blur";
 import { FontAwesome } from "@expo/vector-icons";
+import Poster from "../components/Poster";
 
 // Styled Component
 const BackgroundImg = styled.Image``;
-
-const Poster = styled.Image`
-  width: 110px;
-  height: 170px;
-  margin-left: 15px;
-`;
 
 const Title = styled.Text<{ isDark: boolean }>`
   font-size: 16px;
@@ -60,6 +55,8 @@ interface SlideProps {
 }
 
 // Utility Functions
+const makeImgPath = (img: string, width: string = "w500") =>
+  `https://image.tmdb.org/t/p/${width}${img}`;
 
 const getStars = (rating: number) => {
   rating = Math.round(rating) / 2;
@@ -69,9 +66,6 @@ const getStars = (rating: number) => {
   for (let i = 5 - rating; i >= 1; i--) output.push("empty");
   return output;
 };
-
-const makeImgPath = (img: string, width: string = "w500") =>
-  `https://image.tmdb.org/t/p/${width}${img}`;
 
 // View
 const Slide: React.FC<SlideProps> = ({
@@ -94,7 +88,7 @@ const Slide: React.FC<SlideProps> = ({
         style={StyleSheet.absoluteFill}
       >
         <Wrapper>
-          <Poster source={{ uri: makeImgPath(poster_path) }}></Poster>
+          <Poster path={poster_path} />
           <TextWrapper>
             <Title isDark={isDark}>{original_title}</Title>
             {vote_average > 0 ? (
