@@ -11,7 +11,6 @@ const BackgroundImg = styled.Image``;
 const Title = styled.Text<{ isDark: boolean }>`
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 5px;
   color: ${(props) => (props.isDark ? "white" : props.theme.textColor)};
 `;
 const Wrapper = styled.View`

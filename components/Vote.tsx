@@ -4,8 +4,8 @@ import styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
 
 const VoteData = styled.Text<{ isDark: boolean }>`
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 12px;
+  margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 5px;
   color: ${(props) => (props.isDark ? "white" : props.theme.textColor)};
@@ -33,19 +33,19 @@ const Vote: React.FC<VoteProps> = ({ vote_average }) => {
   const isDark = useColorScheme() === "dark";
   return (
     <VoteContainer>
-      <VoteData isDark={isDark}>{vote_average}</VoteData>
+      <VoteData isDark={isDark}>{vote_average.toFixed(1)}</VoteData>
       <VoteData isDark={isDark}>
         {getStars(vote_average).map((item, index) => {
           if (item === "full") {
             return (
-              <FontAwesome name="star" size={14} color="#fbbf24" key={index} />
+              <FontAwesome name="star" size={12} color="#fbbf24" key={index} />
             );
           }
           if (item === "half") {
             return (
               <FontAwesome
                 name="star-half-full"
-                size={14}
+                size={12}
                 color="#fbbf24"
                 key={index}
               />
@@ -56,7 +56,7 @@ const Vote: React.FC<VoteProps> = ({ vote_average }) => {
             return (
               <FontAwesome
                 name="star-o"
-                size={14}
+                size={12}
                 color="#fbbf24"
                 key={index}
               />

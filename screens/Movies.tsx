@@ -7,6 +7,7 @@ import { API_KEY } from "@env";
 import { useState, useEffect } from "react";
 import Slide from "../components/Slide";
 import Poster from "../components/Poster";
+import Vote from "../components/Vote";
 // Create styled components
 const Container = styled.ScrollView`
   background-color: ${(props) => props.theme.mainBgColor};
@@ -27,6 +28,14 @@ const ListTitle = styled.Text`
 
 const Movie = styled.View`
   margin-right: 20px;
+  align-items: center;
+`;
+
+const Title = styled.Text`
+  width: 120px;
+  text-align: center;
+  color: ${(props) => props.theme.textColor};
+  font-size: 12px;
 `;
 
 const TrendingScroll = styled.ScrollView`
@@ -109,6 +118,8 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
         {trending.map((movie) => (
           <Movie key={movie.id}>
             <Poster path={movie.poster_path}></Poster>
+            <Vote vote_average={movie.vote_average}></Vote>
+            <Title>{movie.title}</Title>
           </Movie>
         ))}
       </TrendingScroll>
