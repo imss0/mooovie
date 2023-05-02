@@ -2,10 +2,11 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
-import { ActivityIndicator, Dimensions } from "react-native";
+import { ActivityIndicator, Dimensions, ScrollView } from "react-native";
 import { API_KEY } from "@env";
 import { useState, useEffect } from "react";
 import Slide from "../components/Slide";
+import Poster from "../components/Poster";
 // Create styled components
 const Container = styled.ScrollView`
   background-color: ${(props) => props.theme.mainBgColor};
@@ -17,6 +18,19 @@ const Loader = styled.View`
   align-items: center;
 `;
 
+const ListTitle = styled.Text`
+  color: ${(props) => props.theme.textColor};
+  font-size: 16px;
+  font-weight: 700;
+  margin: 20px;
+`;
+
+const Movie = styled.View`
+  margin-right: 20px;
+`;
+
+const TrendingScroll = styled.ScrollView`
+`;
 // Global variable
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -49,7 +63,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
   const getTrending = async () => {
     const { results } = await (
       await fetch(
-        `https://api.themoviedb.org/3/movie/trending/movie/week?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
       )
     ).json();
     setTrending(results);
@@ -89,6 +103,14 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
           />
         ))}
       </Swiper>
+      <ListTitle>Trending Movies</ListTitle>
+      <TrendingScroll horizontal showsHorizontalScrollIndicator={false}>
+        {trending.map((movie) => (
+          <Movie key={movie.id}>
+            <Poster path={movie.poster_path}></Poster>
+          </Movie>
+        ))}
+      </TrendingScroll>
     </Container>
   );
 };
