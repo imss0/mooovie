@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components/native";
 import { View, StyleSheet, useColorScheme } from "react-native";
 import { BlurView } from "expo-blur";
-import { FontAwesome } from "@expo/vector-icons";
 import Poster from "../components/Poster";
+import Vote from "../components/Vote";
 
 // Styled Component
 const BackgroundImg = styled.Image``;
@@ -19,6 +19,7 @@ const Wrapper = styled.View`
   height: 100%;
   justify-content: center;
   align-items: center;
+  padding-left: 15px;
 `;
 
 const TextWrapper = styled.ScrollView`
@@ -35,45 +36,26 @@ const OverView = styled(Title)`
   font-size: 14px;
 `;
 
-const Vote = styled(Title)`
-  font-size: 14px;
-  margin-right: 10px;
-`;
-
-const VoteContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
 // Props
 interface SlideProps {
   backdrop_path: string;
   poster_path: string;
   original_title: string;
-  vote_average: number;
   overview: string;
+  vote_average: number;
 }
 
 // Utility Functions
 const makeImgPath = (img: string, width: string = "w500") =>
   `https://image.tmdb.org/t/p/${width}${img}`;
 
-const getStars = (rating: number) => {
-  rating = Math.round(rating) / 2;
-  let output = [];
-  for (var i = rating; i >= 1; i--) output.push("full");
-  if (i == 0.5) output.push("half");
-  for (let i = 5 - rating; i >= 1; i--) output.push("empty");
-  return output;
-};
-
 // View
 const Slide: React.FC<SlideProps> = ({
   backdrop_path,
   poster_path,
   original_title,
-  vote_average,
   overview,
+  vote_average,
 }) => {
   const isDark = useColorScheme() === "dark";
   return (
@@ -92,44 +74,7 @@ const Slide: React.FC<SlideProps> = ({
           <TextWrapper>
             <Title isDark={isDark}>{original_title}</Title>
             {vote_average > 0 ? (
-              <VoteContainer>
-                <Vote isDark={isDark}>{vote_average}</Vote>
-                <Vote isDark={isDark}>
-                  {getStars(vote_average).map((item, index) => {
-                    if (item === "full") {
-                      return (
-                        <FontAwesome
-                          name="star"
-                          size={14}
-                          color="#fbbf24"
-                          key={index}
-                        />
-                      );
-                    }
-                    if (item === "half") {
-                      return (
-                        <FontAwesome
-                          name="star-half-full"
-                          size={14}
-                          color="#fbbf24"
-                          key={index}
-                        />
-                      );
-                    }
-
-                    if (item === "empty") {
-                      return (
-                        <FontAwesome
-                          name="star-o"
-                          size={14}
-                          color="#fbbf24"
-                          key={index}
-                        />
-                      );
-                    }
-                  })}
-                </Vote>
-              </VoteContainer>
+              <Vote vote_average={vote_average}></Vote>
             ) : null}
             <OverView isDark={isDark}>{overview}</OverView>
           </TextWrapper>

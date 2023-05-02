@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
-import { ActivityIndicator, Dimensions, ScrollView } from "react-native";
+import { ActivityIndicator, Dimensions } from "react-native";
 import { API_KEY } from "@env";
 import { useState, useEffect } from "react";
 import Slide from "../components/Slide";
@@ -30,6 +30,7 @@ const Movie = styled.View`
 `;
 
 const TrendingScroll = styled.ScrollView`
+  margin-left: 15px;
 `;
 // Global variable
 
