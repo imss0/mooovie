@@ -41,6 +41,40 @@ const Title = styled.Text`
 const TrendingScroll = styled.ScrollView`
   margin-left: 15px;
 `;
+
+const ListContainer = styled.View`
+  margin-bottom: 40px;
+`;
+
+const VoteText = styled.Text`
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  color: ${(props) => props.theme.textColor}};
+`;
+
+const Column = styled.View``;
+
+const HorizontalMovie = styled.View`
+  flex-direction: row;
+  padding: 0px 30px;
+`;
+
+const HorizontalTitle = styled.Text`
+  text-align: left;
+  width: 200px;
+  margin: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: ${(props) => props.theme.textColor}};
+`;
+
+const Overview = styled.Text`
+  color: ${(props) => props.theme.textColor}};
+  margin: 10px;
+  overflow: hidden;
+  `;
 // Global variable
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -113,16 +147,32 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
           />
         ))}
       </Swiper>
-      <ListTitle>Trending Movies</ListTitle>
-      <TrendingScroll horizontal showsHorizontalScrollIndicator={false}>
-        {trending.map((movie) => (
-          <Movie key={movie.id}>
-            <Poster path={movie.poster_path}></Poster>
-            <Vote vote_average={movie.vote_average}></Vote>
-            <Title>{movie.title}</Title>
-          </Movie>
-        ))}
-      </TrendingScroll>
+      <ListContainer>
+        <ListTitle>Trending Movies</ListTitle>
+        <TrendingScroll horizontal showsHorizontalScrollIndicator={false}>
+          {trending.map((movie) => (
+            <Movie key={movie.id}>
+              <Poster path={movie.poster_path}></Poster>
+              {movie.vote_average > 0 ? (
+                <Vote vote_average={movie.vote_average}></Vote>
+              ) : (
+                <VoteText>Coming soon</VoteText>
+              )}
+              <Title>{movie.title}</Title>
+            </Movie>
+          ))}
+        </TrendingScroll>
+      </ListContainer>
+      <ListTitle>Upcoming Movies</ListTitle>
+      {upComing.map((movie) => (
+        <HorizontalMovie key={movie.id}>
+          <Poster path={movie.poster_path} />
+          <Column>
+            <HorizontalTitle>{movie.title}</HorizontalTitle>
+            <Overview>{movie.overview}</Overview>
+          </Column>
+        </HorizontalMovie>
+      ))}
     </Container>
   );
 };

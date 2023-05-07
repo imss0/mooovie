@@ -35,6 +35,7 @@ const OverView = styled(Title)`
   font-size: 14px;
 `;
 
+
 // Props
 interface SlideProps {
   backdrop_path: string;

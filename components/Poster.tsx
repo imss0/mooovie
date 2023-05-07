@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 const Image = styled.Image`
   width: 110px;
   height: 170px;
+  background-color: rgba(255, 255, 255, 0.2);
 `;
 
 interface PosterProps {
