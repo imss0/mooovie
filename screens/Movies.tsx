@@ -68,7 +68,7 @@ const HorizontalMovie = styled.View`
 const HorizontalTitle = styled.Text`
   text-align: left;
   width: 200px;
-  margin: 10px;
+  margin-left: 10px;
   font-size: 16px;
   font-weight: 600;
   color: ${(props) => props.theme.textColor}};
@@ -176,8 +176,8 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
               Release date : {movie.release_date}
             </SmallText>
             <Overview>
-              {movie.overview !== "" && movie.overview.length > 120
-                ? `${movie.overview.slice(0, 120)}...`
+              {movie.overview !== "" && movie.overview.length > 150
+                ? `${movie.overview.slice(0, 150)}...`
                 : movie.overview}
             </Overview>
           </Column>
