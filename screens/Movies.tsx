@@ -46,7 +46,7 @@ const ListContainer = styled.View`
   margin-bottom: 40px;
 `;
 
-const VoteText = styled.Text`
+const SmallText = styled.Text`
   font-size: 12px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -54,11 +54,15 @@ const VoteText = styled.Text`
   color: ${(props) => props.theme.textColor}};
 `;
 
-const Column = styled.View``;
+const Column = styled.View`
+  width: 65%;
+  margin-left: 15px;
+`;
 
 const HorizontalMovie = styled.View`
   flex-direction: row;
-  padding: 0px 30px;
+  padding: 0px 20px;
+  margin-bottom: 30px;
 `;
 
 const HorizontalTitle = styled.Text`
@@ -72,8 +76,7 @@ const HorizontalTitle = styled.Text`
 
 const Overview = styled.Text`
   color: ${(props) => props.theme.textColor}};
-  margin: 10px;
-  overflow: hidden;
+  margin-left: 10px;
   `;
 // Global variable
 
@@ -156,7 +159,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
               {movie.vote_average > 0 ? (
                 <Vote vote_average={movie.vote_average}></Vote>
               ) : (
-                <VoteText>Coming soon</VoteText>
+                <SmallText>Coming soon</SmallText>
               )}
               <Title>{movie.title}</Title>
             </Movie>
@@ -169,7 +172,14 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
           <Poster path={movie.poster_path} />
           <Column>
             <HorizontalTitle>{movie.title}</HorizontalTitle>
-            <Overview>{movie.overview}</Overview>
+            <SmallText style={{ marginLeft: 10 }}>
+              Release date : {movie.release_date}
+            </SmallText>
+            <Overview>
+              {movie.overview !== "" && movie.overview.length > 120
+                ? `${movie.overview.slice(0, 120)}...`
+                : movie.overview}
+            </Overview>
           </Column>
         </HorizontalMovie>
       ))}
