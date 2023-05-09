@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import Slide from "../components/Slide";
 import Poster from "../components/Poster";
 import Vote from "../components/Vote";
+import { RefreshControl } from "react-native-gesture-handler";
 // Create styled components
 const Container = styled.ScrollView`
   background-color: ${(props) => props.theme.mainBgColor};
@@ -84,10 +85,17 @@ const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 // Main function
 const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
+  const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [nowPlaying, setNowPlaying] = useState<any[]>([]);
   const [upComing, setUpcoming] = useState<any[]>([]);
   const [trending, setTrending] = useState<any[]>([]);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await getData();
+    setRefreshing(false);
+  };
 
   const getNowPlaying = async () => {
     const { results } = await (
@@ -129,7 +137,14 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
       <ActivityIndicator />
     </Loader>
   ) : (
-    <Container>
+    <Container
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        ></RefreshControl>
+      }
+    >
       <Swiper
         loop
         horizontal
