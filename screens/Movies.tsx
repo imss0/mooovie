@@ -27,58 +27,10 @@ const ListTitle = styled.Text`
   margin: 20px;
 `;
 
-const Movie = styled.View`
-  margin-right: 20px;
-  align-items: center;
-`;
-
-const Title = styled.Text`
-  width: 120px;
-  text-align: center;
-  color: ${(props) => props.theme.textColor};
-  font-size: 12px;
-`;
-
-const TrendingScroll = styled.ScrollView`
-  margin-left: 15px;
-`;
-
 const ListContainer = styled.View`
   margin-bottom: 40px;
 `;
 
-const SmallText = styled.Text`
-  font-size: 12px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  color: ${(props) => props.theme.textColor}};
-`;
-
-const Column = styled.View`
-  width: 65%;
-  margin-left: 15px;
-`;
-
-const HorizontalMovie = styled.View`
-  flex-direction: row;
-  padding: 0px 20px;
-  margin-bottom: 30px;
-`;
-
-const HorizontalTitle = styled.Text`
-  text-align: left;
-  width: 200px;
-  margin-left: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  color: ${(props) => props.theme.textColor}};
-`;
-
-const Overview = styled.Text`
-  color: ${(props) => props.theme.textColor}};
-  margin-left: 10px;
-  `;
 // Global variable
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -167,7 +119,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
       </Swiper>
       <ListContainer>
         <ListTitle>Trending Movies</ListTitle>
-        <TrendingScroll horizontal showsHorizontalScrollIndicator={false}>
+        {/* <TrendingScroll horizontal showsHorizontalScrollIndicator={false}>
           {trending.map((movie) => (
             <Movie key={movie.id}>
               <Poster path={movie.poster_path}></Poster>
@@ -179,10 +131,10 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
               <Title>{movie.title}</Title>
             </Movie>
           ))}
-        </TrendingScroll>
+        </TrendingScroll> */}
       </ListContainer>
       <ListTitle>Upcoming Movies</ListTitle>
-      {upComing.map((movie) => (
+      {/* {upComing.map((movie) => (
         <HorizontalMovie key={movie.id}>
           <Poster path={movie.poster_path} />
           <Column>
@@ -197,7 +149,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
             </Overview>
           </Column>
         </HorizontalMovie>
-      ))}
+      ))} */}
     </Container>
   );
 };
