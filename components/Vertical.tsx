@@ -15,10 +15,6 @@ const Title = styled.Text`
   font-size: 12px;
 `;
 
-const TrendingScroll = styled.ScrollView`
-  margin-left: 15px;
-`;
-
 const SmallText = styled.Text`
   font-size: 12px;
   margin-top: 5px;
@@ -27,16 +23,19 @@ const SmallText = styled.Text`
   color: ${(props) => props.theme.textColor}};
 `;
 
-// <TrendingScroll horizontal showsHorizontalScrollIndicator={false}>
-//   {trending.map((movie) => (
-//     <Movie key={movie.id}>
-//       <Poster path={movie.poster_path}></Poster>
-//       {movie.vote_average > 0 ? (
-//         <Vote vote_average={movie.vote_average}></Vote>
-//       ) : (
-//         <SmallText>Coming soon</SmallText>
-//       )}
-//       <Title>{movie.title}</Title>
-//     </Movie>
-//   ))}
-// </TrendingScroll>;
+//@ts-ignore
+const Vertical = ({ id, poster_path, vote_average, title }) => {
+  return (
+    <Movie key={id}>
+      <Poster path={poster_path}></Poster>
+      {vote_average > 0 ? (
+        <Vote vote_average={vote_average}></Vote>
+      ) : (
+        <SmallText>Coming soon</SmallText>
+      )}
+      <Title>{title}</Title>
+    </Movie>
+  );
+};
+
+export default Vertical;
